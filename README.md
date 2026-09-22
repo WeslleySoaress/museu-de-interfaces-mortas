@@ -1,7 +1,16 @@
 # Museu de Interfaces Mortas
 
 [![CI](https://github.com/WeslleySoaress/museu-de-interfaces-mortas/actions/workflows/ci.yml/badge.svg)](https://github.com/WeslleySoaress/museu-de-interfaces-mortas/actions/workflows/ci.yml)
+[![Museu ao vivo](https://img.shields.io/badge/museu-ao%20vivo-2a8a4a)](https://weslleysoaress.github.io/museu-de-interfaces-mortas/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+
+### → [weslleysoaress.github.io/museu-de-interfaces-mortas](https://weslleysoaress.github.io/museu-de-interfaces-mortas/)
+
+Abre direto no navegador, sem instalar nada e sem cadastro. Toda peça é
+clicável: **o modem disca**, **a fita cassete carrega um programa**, **o telex
+transmite** e **o Orkut aceita recado**.
+
+---
 
 Um museu onde as peças funcionam. Você não olha a captura de tela — você
 clica, digita, ouve. Cada sala tem uma plaquinha explicando não só o que era,
