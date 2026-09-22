@@ -1,0 +1,857 @@
+/* A moldura do museu.
+   Escura, silenciosa, tipografia moderna. Tudo aqui existe para sumir e
+   deixar as peças brilharem — elas é que são coloridas e barulhentas.
+
+   LEGIBILIDADE: esta folha governa apenas a moldura. O Verdana 11 do Orkut, o
+   mono do DOS e o fósforo verde do modem são fidelidade histórica e não são
+   corrigidos — para isso existe o controle de ampliação da vitrine, que
+   aumenta a peça sem redesenhá-la. */
+
+:root {
+  /* Texto: três níveis, todos acima de 4.5:1 sobre o papel escuro.
+     O nível fraco só aparece em tipo de 13px ou maior. */
+  --tinta: #f2efe9;
+  --tinta-media: #b5afa6;
+  --tinta-fraca: #8d877e;
+
+  --fundo: #0b0a09;
+  --papel: #151410;
+  --papel-alto: #1c1a16;
+  --linha: #2a2721;
+  --linha-forte: #3a352d;
+
+  /* Escala de espaço, para o ritmo vertical não virar palpite. */
+  --e1: 8px;
+  --e2: 16px;
+  --e3: 24px;
+  --e4: 40px;
+  --e5: 64px;
+  --e6: 96px;
+
+  --raio: 5px;
+  --fonte: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --serif: ui-serif, Georgia, 'Times New Roman', serif;
+  --mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--fundo);
+  color: var(--tinta);
+  font-family: var(--fonte);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.museu {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 var(--e3) var(--e6);
+}
+
+a {
+  color: inherit;
+}
+
+/* ---------- entrada ---------- */
+
+.entrada {
+  padding: var(--e6) 0 var(--e4);
+  border-bottom: 1px solid var(--linha);
+}
+
+.entrada__sobrescrito {
+  margin: 0;
+  font-size: 0.8125rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.entrada__titulo {
+  margin: var(--e2) 0 0;
+  font-family: var(--serif);
+  font-size: clamp(2.6rem, 8vw, 4.6rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.022em;
+}
+
+.entrada__linha {
+  margin: var(--e3) 0 0;
+  max-width: 58ch;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--tinta-media);
+}
+
+.entrada__linha em {
+  color: var(--tinta);
+  font-style: italic;
+}
+
+.entrada__dados {
+  margin: var(--e2) 0 0;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--tinta-fraca);
+}
+
+/* ---------- linha do tempo ---------- */
+
+.tempo {
+  margin: var(--e4) 0 var(--e3);
+}
+
+.tempo__trilho {
+  position: relative;
+  height: 92px;
+  margin: 0 var(--e3);
+}
+
+.tempo__eixo {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--linha-forte) 6%, var(--linha-forte) 94%, transparent);
+}
+
+.tempo__marca {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  text-decoration: none;
+}
+
+.tempo__ponto {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 9px;
+  height: 9px;
+  margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%;
+  background: var(--linha-forte);
+  border: 1px solid var(--fundo);
+  transition: background-color 0.18s ease, transform 0.18s ease;
+}
+
+.tempo__marca:hover .tempo__ponto,
+.tempo__marca:focus-visible .tempo__ponto {
+  background: var(--cor);
+  transform: scale(1.35);
+}
+
+.tempo__marca.is-ativa .tempo__ponto {
+  background: var(--cor);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--cor) 22%, transparent);
+}
+
+.tempo__rotulo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  white-space: nowrap;
+}
+
+.tempo__marca.is-cima .tempo__rotulo {
+  bottom: calc(50% + 12px);
+}
+
+.tempo__marca.is-baixo .tempo__rotulo {
+  top: calc(50% + 12px);
+}
+
+.tempo__rotulo b {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: var(--tinta-fraca);
+  transition: color 0.18s ease;
+}
+
+/* O nome só aparece no foco ou na peça atual: a linha é orientação, não lista. */
+.tempo__rotulo i {
+  font-size: 0.6875rem;
+  font-style: normal;
+  color: var(--cor);
+  opacity: 0;
+  transition: opacity 0.18s ease;
+}
+
+.tempo__marca:hover .tempo__rotulo b,
+.tempo__marca:focus-visible .tempo__rotulo b,
+.tempo__marca.is-ativa .tempo__rotulo b {
+  color: var(--tinta);
+}
+
+.tempo__marca:hover .tempo__rotulo i,
+.tempo__marca:focus-visible .tempo__rotulo i,
+.tempo__marca.is-ativa .tempo__rotulo i {
+  opacity: 1;
+}
+
+/* ---------- corredor ---------- */
+
+.salas {
+  list-style: none;
+  margin: var(--e3) 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--e2);
+}
+
+.sala {
+  display: flex;
+  flex-direction: column;
+  gap: var(--e1);
+  height: 100%;
+  padding: var(--e3);
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.18s ease, background-color 0.18s ease, transform 0.18s ease;
+}
+
+a.sala:hover,
+a.sala:focus-visible {
+  border-color: var(--cor);
+  background: var(--papel-alto);
+  transform: translateY(-2px);
+}
+
+.sala__ano {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  letter-spacing: 0.12em;
+  color: var(--cor, var(--tinta-fraca));
+  text-transform: uppercase;
+}
+
+.sala__nome {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.12;
+}
+
+.sala__anos {
+  margin: 0;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--tinta-fraca);
+}
+
+.sala__resumo {
+  margin: var(--e1) 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--tinta-media);
+  flex: 1;
+}
+
+.sala__entrar {
+  margin-top: var(--e2);
+  font-size: 0.875rem;
+  color: var(--cor);
+}
+
+/* ---------- dentro da sala ---------- */
+
+.voltar {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e2);
+  flex-wrap: wrap;
+  padding: var(--e3) 0;
+  border-bottom: 1px solid var(--linha);
+}
+
+.voltar a {
+  color: var(--tinta-media);
+  text-decoration: none;
+  font-size: 0.9375rem;
+}
+
+.voltar a:hover {
+  color: var(--tinta);
+}
+
+.voltar__sala {
+  font-family: var(--serif);
+  font-size: 1.25rem;
+  color: var(--tinta);
+}
+
+.voltar__ano {
+  margin-left: auto;
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--tinta-fraca);
+}
+
+/* A vitrine: a peça fica sobre fundo neutro, como quadro pendurado.
+   Nada da moldura vaza para dentro dela. */
+.vitrine {
+  padding: var(--e3);
+  background: var(--papel-alto);
+  border: 1px solid var(--linha);
+  border-radius: var(--raio);
+}
+
+.vitrine__controle {
+  display: flex;
+  align-items: center;
+  gap: var(--e2);
+  flex-wrap: wrap;
+  padding-bottom: var(--e2);
+  margin-bottom: var(--e3);
+  border-bottom: 1px solid var(--linha);
+}
+
+.vitrine__rotulo {
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--tinta-fraca);
+}
+
+.vitrine__escalas {
+  display: flex;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.vitrine__escalas button {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  padding: 5px 12px;
+  color: var(--tinta-media);
+  background: transparent;
+  border: 1px solid var(--linha-forte);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: color 0.16s ease, border-color 0.16s ease;
+}
+
+.vitrine__escalas button:hover {
+  color: var(--tinta);
+  border-color: var(--tinta-fraca);
+}
+
+.vitrine__escalas button.is-ativa {
+  color: var(--fundo);
+  background: var(--tinta-media);
+  border-color: var(--tinta-media);
+}
+
+.vitrine__peca {
+  overflow-x: auto;
+}
+
+/* ---------- plaquinha ---------- */
+
+.placa {
+  margin-top: var(--e3);
+  padding: var(--e4);
+  background: var(--papel);
+  border: 1px solid var(--linha);
+  border-left: 3px solid var(--cor);
+  border-radius: 0 var(--raio) var(--raio) 0;
+}
+
+.placa__topo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e2);
+  flex-wrap: wrap;
+  padding-bottom: var(--e2);
+  border-bottom: 1px solid var(--linha);
+}
+
+.placa__topo h2 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.placa__anos {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--tinta-fraca);
+}
+
+.placa__campos {
+  margin: 0;
+  display: grid;
+  gap: var(--e3);
+  padding-top: var(--e3);
+}
+
+.placa__campos dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--cor);
+  margin-bottom: var(--e1);
+}
+
+.placa__campos dd {
+  margin: 0;
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: var(--tinta);
+  max-width: 62ch;
+}
+
+.placa__fontes {
+  margin-top: var(--e4);
+  padding-top: var(--e2);
+  border-top: 1px solid var(--linha);
+}
+
+.placa__fontes h3 {
+  margin: 0 0 var(--e1);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--tinta-fraca);
+}
+
+.placa__fontes ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 3px;
+}
+
+.placa__fontes li {
+  font-size: 0.8125rem;
+  line-height: 1.6;
+}
+
+.placa__fontes a {
+  color: var(--tinta-fraca);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+
+.placa__fontes a:hover {
+  color: var(--tinta-media);
+  border-bottom-color: var(--linha-forte);
+}
+
+/* ---------- peças vizinhas ---------- */
+
+.vizinhas {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--e2);
+  margin-top: var(--e4);
+  padding-top: var(--e3);
+  border-top: 1px solid var(--linha);
+}
+
+.vizinhas__link {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  text-decoration: none;
+  max-width: 45%;
+}
+
+.vizinhas__link--fim {
+  text-align: right;
+  margin-left: auto;
+}
+
+.vizinhas__direcao {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--tinta-fraca);
+}
+
+.vizinhas__nome {
+  font-family: var(--serif);
+  font-size: 1.125rem;
+  color: var(--tinta-media);
+  transition: color 0.16s ease;
+}
+
+.vizinhas__link:hover .vizinhas__nome {
+  color: var(--tinta);
+}
+
+/* ---------- rodapé ---------- */
+
+.rodape {
+  margin-top: var(--e5);
+  padding-top: var(--e3);
+  border-top: 1px solid var(--linha);
+  display: grid;
+  gap: var(--e2);
+}
+
+.rodape p {
+  margin: 0;
+  max-width: 64ch;
+  font-size: 0.875rem;
+  line-height: 1.75;
+  color: var(--tinta-fraca);
+}
+
+.rodape strong {
+  color: var(--tinta-media);
+  font-weight: 500;
+}
+
+/* ---------- foco visível, em tudo ---------- */
+
+a:focus-visible,
+button:focus-visible,
+select:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--tinta-media);
+  outline-offset: 2px;
+}
+
+@media (max-width: 720px) {
+  body {
+    font-size: 16px;
+  }
+
+  .museu {
+    padding: 0 var(--e2) var(--e5);
+  }
+
+  .entrada {
+    padding: var(--e5) 0 var(--e3);
+  }
+
+  .vitrine {
+    padding: var(--e2);
+  }
+
+  .placa {
+    padding: var(--e3);
+  }
+
+  .tempo__trilho {
+    margin: 0 var(--e2);
+  }
+
+  .tempo__rotulo i {
+    display: none;
+  }
+
+  .vizinhas {
+    flex-direction: column;
+  }
+
+  .vizinhas__link,
+  .vizinhas__link--fim {
+    max-width: none;
+    text-align: left;
+    margin-left: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ---------- eras ---------- */
+
+.era {
+  margin-top: var(--e5);
+}
+
+.era__topo {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e2);
+  flex-wrap: wrap;
+  padding-bottom: var(--e1);
+  border-bottom: 1px solid var(--linha);
+}
+
+.era__nome {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.era__periodo {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--tinta-fraca);
+  margin-left: auto;
+}
+
+.era__resumo {
+  margin: var(--e2) 0 var(--e3);
+  max-width: 68ch;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--tinta-media);
+}
+
+/* ---------- peça em restauração ---------- */
+
+.sala--restauro {
+  border-style: dashed;
+  background: transparent;
+}
+
+.sala--restauro .sala__nome,
+.sala--restauro .sala__ano {
+  color: var(--tinta-fraca);
+}
+
+.sala--restauro .sala__resumo {
+  color: var(--tinta-fraca);
+}
+
+.sala__selo {
+  margin-top: var(--e2);
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  padding: 3px 9px;
+  color: var(--tinta-fraca);
+  border: 1px solid var(--linha-forte);
+  border-radius: 999px;
+}
+
+/* ---------- linha do tempo: peças futuras ---------- */
+
+.tempo__marca--futura {
+  cursor: default;
+}
+
+.tempo__marca--futura .tempo__ponto {
+  width: 5px;
+  height: 5px;
+  margin: -2.5px 0 0 -2.5px;
+  background: transparent;
+  border: 1px solid var(--linha-forte);
+}
+
+.tempo__marca--futura:hover .tempo__ponto {
+  border-color: var(--cor);
+  transform: scale(1.4);
+}
+
+.tempo__legenda {
+  margin: var(--e1) var(--e3) 0;
+  font-size: 0.75rem;
+  color: var(--tinta-fraca);
+  text-align: center;
+}
+
+.entrada__atalho {
+  margin: var(--e2) 0 0;
+}
+
+.entrada__atalho a {
+  font-size: 0.9375rem;
+  color: var(--tinta-media);
+  text-decoration: none;
+  border-bottom: 1px solid var(--linha-forte);
+  padding-bottom: 2px;
+}
+
+.entrada__atalho a:hover {
+  color: var(--tinta);
+  border-bottom-color: var(--tinta-fraca);
+}
+
+/* ---------- cemitério digital ---------- */
+
+.cemiterio__topo {
+  padding: var(--e5) 0 var(--e4);
+  border-bottom: 1px solid var(--linha);
+}
+
+.cemiterio__topo h1 {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: clamp(2rem, 6vw, 3.2rem);
+  font-weight: 400;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+.cemiterio__topo p {
+  margin: var(--e3) 0 0;
+  max-width: 58ch;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--tinta-media);
+}
+
+.cemiterio__lista {
+  list-style: none;
+  margin: var(--e4) 0 0;
+  padding: 0;
+  display: grid;
+  gap: var(--e3);
+}
+
+.lapide {
+  padding: var(--e3) 0;
+  border-top: 1px solid var(--linha);
+}
+
+.lapide__cabeca {
+  display: flex;
+  align-items: baseline;
+  gap: var(--e2);
+  flex-wrap: wrap;
+  margin-bottom: var(--e2);
+}
+
+.lapide__nome {
+  font-family: var(--serif);
+  font-size: 1.5rem;
+  color: var(--cor);
+  text-decoration: none;
+}
+
+.lapide__nome:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.lapide__anos {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--tinta-fraca);
+  margin-left: auto;
+}
+
+.lapide__corpo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--e3);
+}
+
+.lapide__corpo h3 {
+  margin: 0 0 var(--e1);
+  font-size: 0.6875rem;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--tinta-fraca);
+}
+
+.lapide__corpo p {
+  margin: 0;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--tinta-media);
+}
+
+/* O que sobrou é o lado que importa: fica em tinta cheia. */
+.lapide__legado h3 {
+  color: var(--cor);
+}
+
+.lapide__legado p {
+  color: var(--tinta);
+}
+
+@media (max-width: 720px) {
+  .lapide__corpo {
+    grid-template-columns: 1fr;
+    gap: var(--e2);
+  }
+
+  .era__periodo {
+    margin-left: 0;
+  }
+}
+
+.rodape__seguranca {
+  padding-top: var(--e2);
+  border-top: 1px solid var(--linha);
+}
+
+.rodape__seguranca em {
+  color: var(--tinta-media);
+  font-style: italic;
+}
+
+.vitrine__abrindo {
+  margin: 0;
+  padding: var(--e5) 0;
+  text-align: center;
+  font-size: 0.9375rem;
+  color: var(--tinta-fraca);
+}
+
+/* Crédito no canto de baixo, como placa de museu: presente, nunca no caminho. */
+.creditos {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--e3);
+  flex-wrap: wrap;
+  margin-top: var(--e3);
+  padding-top: var(--e2);
+  border-top: 1px solid var(--linha);
+}
+
+.creditos__marcas {
+  flex: 1;
+  min-width: 240px;
+  max-width: 62ch;
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--tinta-fraca);
+}
+
+.creditos__autoria {
+  margin-left: auto;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--tinta-media);
+  white-space: nowrap;
+}
+
+@media (max-width: 600px) {
+  .creditos__autoria {
+    margin-left: 0;
+  }
+}

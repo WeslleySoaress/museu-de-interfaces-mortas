@@ -1,0 +1,139 @@
+/* Cartão perfurado: papel manilha, canto cortado, furos retangulares. */
+
+.cartao {
+  --papel: #e8dcb8;
+  --papel-escuro: #d4c69c;
+  --tinta: #5a4a2a;
+
+  max-width: 760px;
+  margin: 0 auto;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+}
+
+.cartao__controles {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+
+.cartao__controles label {
+  font-size: 10px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a8073;
+}
+
+.cartao__controles input {
+  flex: 1;
+  min-width: 180px;
+  font-family: inherit;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 7px 10px;
+  color: var(--tinta);
+  background: var(--papel);
+  border: 1px solid #a89a72;
+  border-radius: 2px;
+}
+
+.cartao__contador {
+  font-size: 11px;
+  color: #8a8073;
+}
+
+.cartao__exemplos {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.cartao__exemplos button {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 4px 9px;
+  color: #b8ae9a;
+  background: #23211d;
+  border: 1px solid #3f3a32;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.cartao__exemplos button:hover {
+  border-color: #a89a72;
+  color: var(--papel);
+}
+
+.cartao__rolagem {
+  overflow-x: auto;
+  padding-bottom: 6px;
+}
+
+.cartao__papel {
+  min-width: 820px;
+  padding: 12px 10px 14px;
+  background: linear-gradient(175deg, var(--papel), var(--papel-escuro));
+  border: 1px solid #a89a72;
+  /* canto superior esquerdo cortado: era assim que o operador sabia que o
+     maço estava todo virado para o mesmo lado */
+  clip-path: polygon(14px 0, 100% 0, 100% 100%, 0 100%, 0 14px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+.cartao__impresso {
+  display: grid;
+  grid-template-columns: repeat(80, 1fr);
+  margin-bottom: 7px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(90, 74, 42, 0.25);
+}
+
+.cartao__impresso span {
+  font-size: 8px;
+  line-height: 1;
+  text-align: center;
+  color: var(--tinta);
+  white-space: pre;
+}
+
+.cartao__linha {
+  display: grid;
+  grid-template-columns: repeat(80, 1fr);
+  gap: 0;
+}
+
+.cartao__pos {
+  height: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6px;
+  line-height: 1;
+  color: rgba(90, 74, 42, 0.32);
+}
+
+/* O furo: retangular, alto e estreito, como o da perfuradora. */
+.cartao__pos.is-furo::after {
+  content: '';
+  width: 58%;
+  height: 74%;
+  background: #14120e;
+  border-radius: 1px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.8);
+}
+
+.cartao__legenda {
+  margin: 12px 0 0;
+  font-size: 11px;
+  line-height: 1.65;
+  color: #7a7167;
+  text-align: center;
+}
+
+@media (max-width: 560px) {
+  .cartao__papel { min-width: 700px; }
+  .cartao__pos { height: 11px; }
+}

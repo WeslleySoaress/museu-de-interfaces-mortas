@@ -1,0 +1,211 @@
+/* Chrome de janela: 95 e XP. A estrutura é a mesma, a pele muda. */
+
+.jan {
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 11px;
+  color: #000;
+  margin-bottom: 10px;
+}
+
+.jan--xp {
+  background: #ece9d8;
+  border: 1px solid #0a54c8;
+  border-radius: 7px 7px 0 0;
+  overflow: hidden;
+}
+
+.jan__barra {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 2px 3px;
+  background: linear-gradient(90deg, #000080, #1084d0);
+  color: #fff;
+  font-weight: bold;
+}
+
+.jan--xp .jan__barra {
+  padding: 4px 5px 4px 9px;
+  background: linear-gradient(#4a9ced, #0a54c8 55%, #0a44a8);
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.45);
+}
+
+.jan:not(.is-ativa) .jan__barra {
+  background: linear-gradient(90deg, #808080, #b5b5b5);
+}
+
+.jan__titulo {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.jan__botoes {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.jan__botoes button,
+.jan__falso {
+  width: 16px;
+  height: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  font-family: inherit;
+  font-size: 9px;
+  line-height: 1;
+  color: #000;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  cursor: default;
+}
+
+.jan__botoes button {
+  cursor: pointer;
+}
+
+.jan--xp .jan__botoes button,
+.jan--xp .jan__falso {
+  width: 17px;
+  height: 16px;
+  color: #fff;
+  background: linear-gradient(#6fb1f0, #2a6fd0);
+  border: 1px solid #1b4f9c;
+  border-radius: 3px;
+}
+
+.jan--xp .jan__fechar {
+  background: linear-gradient(#f08e7a, #c83a1a) !important;
+  border-color: #9c2a10 !important;
+}
+
+.jan__corpo {
+  padding: 3px;
+}
+
+.jan--xp .jan__corpo {
+  padding: 6px;
+  background: #ece9d8;
+}
+
+/* ---- barra de tarefas ---- */
+
+.barra {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 4px;
+  background: #c0c0c0;
+  border-top: 2px outset #c0c0c0;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 11px;
+}
+
+.barra--xp {
+  background: linear-gradient(#3c8ae8, #1a5ad0 12%, #2a6fd8);
+  border-top: 1px solid #6ab0f0;
+  color: #fff;
+}
+
+.barra__iniciar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: bold;
+  padding: 3px 9px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  cursor: pointer;
+}
+
+.barra__iniciar.is-aberto {
+  border-style: inset;
+}
+
+.barra--xp .barra__iniciar {
+  color: #fff;
+  background: linear-gradient(#6ac84a, #2a8a1a);
+  border: 1px solid #1a6a0a;
+  border-radius: 0 9px 9px 0;
+  font-style: italic;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.4);
+  padding: 4px 14px 4px 9px;
+}
+
+.barra__bandeira {
+  width: 13px;
+  height: 12px;
+  background:
+    linear-gradient(90deg, #e84a4a 0 50%, #4ae84a 50% 100%) top / 100% 50% no-repeat,
+    linear-gradient(90deg, #4a8ae8 0 50%, #e8d84a 50% 100%) bottom / 100% 50% no-repeat;
+  transform: skewY(-8deg);
+}
+
+.barra--xp .barra__bandeira {
+  display: none;
+}
+
+.barra__abertas {
+  display: flex;
+  gap: 3px;
+  flex: 1;
+  overflow: hidden;
+}
+
+.barra__abertas button {
+  font-family: inherit;
+  font-size: 11px;
+  padding: 3px 9px;
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+  cursor: pointer;
+}
+
+.barra--xp .barra__abertas button {
+  color: #fff;
+  background: linear-gradient(#5a9ee8, #2a6fd0);
+  border: 1px solid #1a5ab0;
+  border-radius: 3px;
+}
+
+.barra__relogio {
+  padding: 3px 8px;
+  border: 1px inset #c0c0c0;
+  font-variant-numeric: tabular-nums;
+}
+
+.barra--xp .barra__relogio {
+  border: 0;
+  background: rgba(0, 0, 0, 0.12);
+  border-radius: 3px;
+}
+
+.barra__menu {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  min-width: 190px;
+  background: #c0c0c0;
+  border: 2px outset #c0c0c0;
+  padding: 2px;
+  z-index: 20;
+}
+
+.barra--xp .barra__menu {
+  background: #ece9d8;
+  border: 1px solid #0a54c8;
+  border-radius: 6px 6px 0 0;
+}

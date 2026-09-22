@@ -1,0 +1,328 @@
+/* Páginas pessoais: os papéis de parede são desenhados em CSS, sem imagem
+   nenhuma — o mesmo padrão de 40 pixels repetindo até o fim da tela, que é
+   exatamente o que aqueles arquivos .gif de 2 KB faziam. */
+
+.pag {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 16px;
+  align-items: start;
+  max-width: 820px;
+  margin: 0 auto;
+}
+
+/* ---- oficina (fora da época: é a bancada do museu, não da página) ---- */
+
+.pag__oficina {
+  padding: 14px;
+  background: #16150f;
+  border: 1px solid #33302a;
+  border-radius: 5px;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 12px;
+  color: #b5afa6;
+}
+
+.pag__oficina h3 {
+  margin: 0 0 12px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #8d877e;
+}
+
+.pag__campo {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.pag__campo > span {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 11px;
+  color: #8d877e;
+}
+
+.pag__campo input {
+  width: 100%;
+  font: inherit;
+  font-size: 12px;
+  padding: 5px 7px;
+  color: #f2efe9;
+  background: #0b0a09;
+  border: 1px solid #3a352d;
+  border-radius: 3px;
+}
+
+.pag__opcoes {
+  display: flex;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.pag__amostra,
+.pag__cor {
+  width: 30px;
+  height: 24px;
+  border: 1px solid #3a352d;
+  border-radius: 2px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.pag__amostra.is-ativa,
+.pag__cor.is-ativa {
+  outline: 2px solid #f2efe9;
+  outline-offset: 1px;
+}
+
+.pag__campo--chaves {
+  display: grid;
+  gap: 6px;
+}
+
+.pag__chave {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.pag__aviso {
+  margin: 14px 0 0;
+  padding-top: 10px;
+  border-top: 1px solid #33302a;
+  font-size: 11px;
+  line-height: 1.6;
+  color: #8d877e;
+}
+
+/* ---- papéis de parede, todos em CSS puro ---- */
+
+.pag__amostra--estrelas,
+.pag__preview--estrelas {
+  background-color: #000033;
+  background-image:
+    radial-gradient(1.5px 1.5px at 8px 9px, #fff, transparent),
+    radial-gradient(1px 1px at 27px 22px, #ffe, transparent),
+    radial-gradient(1.5px 1.5px at 35px 6px, #fff, transparent),
+    radial-gradient(1px 1px at 15px 33px, #cff, transparent);
+  background-size: 40px 40px;
+}
+
+.pag__amostra--nuvens,
+.pag__preview--nuvens {
+  background-color: #5aa8e0;
+  background-image:
+    radial-gradient(12px 7px at 14px 16px, rgba(255, 255, 255, 0.9), transparent),
+    radial-gradient(9px 5px at 30px 28px, rgba(255, 255, 255, 0.75), transparent);
+  background-size: 48px 44px;
+}
+
+.pag__amostra--tijolos,
+.pag__preview--tijolos {
+  background-color: #8a3a2a;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.2) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.2) 2px, transparent 2px);
+  background-size: 40px 20px;
+}
+
+.pag__amostra--xadrez,
+.pag__preview--xadrez {
+  background-color: #222;
+  background-image:
+    linear-gradient(45deg, #444 25%, transparent 25%, transparent 75%, #444 75%),
+    linear-gradient(45deg, #444 25%, transparent 25%, transparent 75%, #444 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 14px 14px;
+}
+
+.pag__amostra--listras,
+.pag__preview--listras {
+  background-color: #2a1a4a;
+  background-image: repeating-linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.07) 0 8px,
+    transparent 8px 16px
+  );
+}
+
+/* ---- a página ---- */
+
+.pag__preview {
+  padding: 18px;
+  border: 2px ridge #999;
+  font-family: 'Comic Sans MS', 'Segoe Print', cursive, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+  min-height: 520px;
+}
+
+.pag__titulo {
+  margin: 0;
+  text-align: center;
+  font-size: 26px;
+  letter-spacing: 0.02em;
+}
+
+.pag__titulo.is-piscando {
+  animation: pag-pisca 1s steps(2, end) infinite;
+}
+
+@keyframes pag-pisca {
+  50% { opacity: 0; }
+}
+
+.pag__hr {
+  height: 5px;
+  border: 0;
+  margin: 12px 0;
+  background: linear-gradient(90deg, #f00, #ff0, #0f0, #0ff, #00f, #f0f, #f00);
+}
+
+.pag__marquee {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 3px 0;
+  margin-bottom: 10px;
+}
+
+.pag__marquee span {
+  display: inline-block;
+  padding-left: 100%;
+  animation: pag-corre 14s linear infinite;
+  font-weight: bold;
+}
+
+@keyframes pag-corre {
+  to { transform: translateX(-100%); }
+}
+
+.pag__texto {
+  margin: 0 0 12px;
+}
+
+.pag__obras {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 10px;
+  margin-bottom: 12px;
+  background: #ffcc00;
+  color: #000;
+  border: 2px dashed #000;
+  font-weight: bold;
+  font-size: 12px;
+  text-shadow: none;
+}
+
+.pag__obras-placa {
+  font-size: 20px;
+  animation: pag-balanca 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes pag-balanca {
+  from { transform: rotate(-12deg); }
+  to { transform: rotate(12deg); }
+}
+
+.pag__links {
+  margin: 0 0 12px;
+  padding-left: 6px;
+  list-style: none;
+}
+
+.pag__links li {
+  padding: 1px 0;
+  text-decoration: underline;
+}
+
+.pag__livro h2 {
+  margin: 0 0 8px;
+  font-size: 17px;
+}
+
+.pag__assinatura {
+  margin: 0 0 5px;
+  padding: 5px 8px;
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  font-size: 12px;
+}
+
+.pag__form {
+  display: flex;
+  gap: 5px;
+  margin-top: 8px;
+  flex-wrap: wrap;
+}
+
+.pag__form input {
+  flex: 1 1 150px;
+  font-family: inherit;
+  font-size: 12px;
+  padding: 4px 6px;
+  border: 2px inset #ccc;
+}
+
+.pag__form button {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: bold;
+  padding: 4px 12px;
+  border: 2px outset #ccc;
+  background: #ddd;
+  color: #000;
+  cursor: pointer;
+}
+
+.pag__form button:active:not(:disabled) {
+  border-style: inset;
+}
+
+.pag__contador {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+  margin: 16px 0 8px;
+  font-size: 12px;
+  flex-wrap: wrap;
+}
+
+.pag__digitos {
+  display: flex;
+  gap: 2px;
+}
+
+.pag__digitos b {
+  width: 16px;
+  padding: 2px 0;
+  text-align: center;
+  background: #000;
+  color: #0f0;
+  border: 1px solid #0a0;
+  font-family: ui-monospace, monospace;
+  font-size: 14px;
+  text-shadow: none;
+}
+
+.pag__rodape {
+  margin: 10px 0 0;
+  text-align: center;
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.pag__nota-musica {
+  animation: pag-pisca 1.4s steps(2, end) infinite;
+}
+
+@media (max-width: 720px) {
+  .pag {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,92 @@
+name: CI
+
+# Roda a cada push e a cada pull request na branch principal.
+# O objetivo é que o que o README afirma seja verificável por uma máquina
+# neutra, e não apenas declarado: as codificações do acervo são conferidas
+# decodificando o que elas geram, e o contraste é medido, não estimado.
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+# Um push novo cancela a execução anterior da mesma referência: não adianta
+# gastar minuto de runner terminando a verificação de um commit já substituído.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verificacao:
+    name: Tipos e build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      # Aqui `npm ci` funciona, diferente de outros projetos: as únicas
+      # dependências de produção são react e react-dom, nenhuma delas com
+      # binário por plataforma, então o lock gerado no Windows é completo
+      # para o Linux.
+      - run: npm ci
+      - name: Verificação de tipos
+        run: npx tsc -b --noEmit
+      - name: Build de produção
+        run: npm run build
+
+  acervo:
+    name: Estrutura do acervo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # Este job existe por causa de um bug real: o menu do Orkut usava
+      # <a href="#perfil"> e, como o museu roteia por hash, clicar ali
+      # expulsava o visitante da sala de volta para a entrada. Passou porque
+      # ninguém estava olhando. Agora alguém está.
+      - name: Peças, plaquinhas, fontes e links internos
+        run: node scripts/smoke-salas.mjs
+
+  codificacoes:
+    name: Codificações do acervo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      # As três peças que codificam dados de verdade são verificadas do mesmo
+      # jeito: gera, decodifica de volta e compara byte a byte. É o que separa
+      # "soa antigo" de "está correto".
+      - name: Cartão perfurado (Hollerith, IBM 029)
+        run: node --experimental-strip-types scripts/smoke-hollerith.ts
+      - name: Telex (ITA2 / Baudot)
+        run: node --experimental-strip-types scripts/smoke-ita2.ts
+      - name: Fita cassete (Kansas City Standard)
+        run: node --experimental-strip-types scripts/smoke-fita.ts
+
+  auditoria:
+    name: Dependências e contraste
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Vulnerabilidades nas dependências de produção
+        run: npm audit --omit=dev --audit-level=high
+      # A moldura do museu precisa passar em AA. As peças não: o tipo miúdo e
+      # o contraste baixo delas são fidelidade histórica, e quem precisa de
+      # mais usa o controle de ampliação da vitrine.
+      - name: Contraste de cor (WCAG AA)
+        run: node scripts/smoke-contraste.mjs

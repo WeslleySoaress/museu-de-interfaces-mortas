@@ -1,0 +1,264 @@
+/* Windows XP: o papel de parede verde-azul, desenhado em gradiente. */
+
+.wxp {
+  max-width: 720px;
+  margin: 0 auto;
+  border: 1px solid #1a5ab0;
+  display: flex;
+  flex-direction: column;
+}
+
+.wxp__area {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  min-height: 420px;
+  padding: 12px;
+  background:
+    radial-gradient(ellipse 120% 60% at 50% 100%, #6aa83a 0 38%, transparent 40%),
+    linear-gradient(#2a6fd8 0%, #6ab0f0 52%, #a8d8f0 62%, #7ab84a 62%, #4a8a2a 100%);
+}
+
+.wxp__icones {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+  width: 82px;
+  flex-shrink: 0;
+}
+
+.wxp__icones button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  background: none;
+  border: 0;
+  padding: 3px;
+  font-family: Tahoma, Verdana, sans-serif;
+  font-size: 10px;
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  line-height: 1.25;
+}
+
+.wxp__icones button:hover {
+  background: rgba(10, 84, 200, 0.4);
+  border-radius: 3px;
+}
+
+.wxp__icone {
+  width: 30px;
+  height: 28px;
+  display: block;
+  border-radius: 4px;
+}
+
+.wxp__icone--ie {
+  background: radial-gradient(circle at 50% 50%, #e8f4ff 0 26%, #2a8ae8 26% 62%, #1a5ab0 62%);
+  border-radius: 50%;
+}
+
+.wxp__icone--msn {
+  background: linear-gradient(140deg, #8ad84a, #2a8a1a);
+  border-radius: 50% 50% 46% 46%;
+}
+
+.wxp__icone--modem {
+  background: linear-gradient(#d8d4c8, #a8a498);
+  border: 1px solid #6a6658;
+}
+
+.wxp__icone--pc {
+  background:
+    linear-gradient(#e8f0f8, #b8c8d8) 3px 2px / 24px 17px no-repeat,
+    linear-gradient(#889, #667) 8px 20px / 14px 5px no-repeat;
+}
+
+.wxp__janelas {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ---- navegador ---- */
+
+.wxp__endereco {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 2px 7px;
+  font-size: 10px;
+  color: #555;
+}
+
+.wxp__endereco input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 3px 5px;
+  border: 1px solid #7a9ac8;
+  background: #fff;
+}
+
+.wxp__endereco button {
+  font-family: inherit;
+  font-size: 10px;
+  padding: 3px 9px;
+  background: linear-gradient(#fff, #dcd8c8);
+  border: 1px solid #8a8878;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.wxp__pagina {
+  background: #fff;
+  border: 1px solid #b8b4a8;
+  padding: 12px 14px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+.wxp__pagina h2 {
+  margin: 0;
+  font-size: 17px;
+  color: #036;
+}
+
+.wxp__pagina-sub {
+  margin: 3px 0 12px;
+  font-size: 10px;
+  color: #999;
+}
+
+.wxp__pagina ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 5px;
+}
+
+.wxp__pagina a {
+  color: #0a4ac8;
+  text-decoration: underline;
+}
+
+.wxp__pagina-nota {
+  margin: 14px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid #eee;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #888;
+}
+
+/* ---- atalhos para outras salas ---- */
+
+.wxp__atalho {
+  padding: 4px 2px;
+  font-size: 11px;
+  line-height: 1.6;
+}
+
+.wxp__atalho p {
+  margin: 0 0 10px;
+}
+
+.wxp__botao-sala {
+  display: inline-block;
+  padding: 5px 12px;
+  background: linear-gradient(#6ac84a, #2a8a1a);
+  border: 1px solid #1a6a0a;
+  border-radius: 4px;
+  color: #fff;
+  text-decoration: none;
+  font-size: 11px;
+}
+
+.wxp__unidades {
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  background: #fff;
+  border: 1px solid #b8b4a8;
+}
+
+.wxp__unidades li {
+  padding: 4px 5px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.wxp__unidades i {
+  color: #777;
+  font-style: normal;
+  font-size: 10px;
+}
+
+/* ---- menu iniciar ---- */
+
+.wxp__menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  min-width: 200px;
+}
+
+.wxp__menu-topo {
+  padding: 7px 11px;
+  background: linear-gradient(#4a9ced, #0a54c8);
+  color: #fff;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.wxp__menu button {
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+  font-size: 11px;
+  padding: 6px 12px;
+  background: none;
+  border: 0;
+  cursor: pointer;
+  color: #000;
+}
+
+.wxp__menu button:hover {
+  background: #2a6fd0;
+  color: #fff;
+}
+
+.wxp__menu-sep {
+  height: 1px;
+  margin: 4px 8px;
+  background: #c8c4b4;
+}
+
+.wxp__dica {
+  margin: 0;
+  padding: 8px;
+  background: #16150f;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  color: #8d877e;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .wxp__area {
+    flex-direction: column;
+  }
+  .wxp__icones {
+    display: flex;
+    width: auto;
+    flex-wrap: wrap;
+  }
+}

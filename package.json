@@ -1,0 +1,31 @@
+{
+  "name": "museu-de-interfaces-mortas",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "tsc -b --noEmit",
+    "verificar": "tsc -b --noEmit && node scripts/smoke-salas.mjs && node --experimental-strip-types scripts/smoke-hollerith.ts && node --experimental-strip-types scripts/smoke-ita2.ts && node --experimental-strip-types scripts/smoke-fita.ts && node scripts/smoke-contraste.mjs"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "^5.7.0",
+    "vite": "^8.3.0"
+  },
+  "author": "Weslley Soares",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/WeslleySoaress/museu-de-interfaces-mortas.git"
+  }
+}

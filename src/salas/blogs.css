@@ -1,0 +1,137 @@
+/* Blogs: os tres temas sao ilegiveis de maneiras diferentes, de proposito. */
+
+.blog {
+  max-width: 740px;
+  margin: 0 auto;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 12px;
+  line-height: 1.7;
+  border: 1px solid #000;
+}
+
+.blog--roxo  { background: #1a0a2a; color: #b89ad8; }
+.blog--rosa  { background: #ffd0e8; color: #c8187a; }
+.blog--verde { background: #001a00; color: #3aff3a; }
+
+.blog--roxo a, .blog--roxo button  { color: #d8a8ff; }
+.blog--rosa a, .blog--rosa button  { color: #8a0a4a; }
+.blog--verde a, .blog--verde button { color: #a8ffa8; }
+
+.blog__temas {
+  display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+  padding: 7px 10px;
+  background: #16150f;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  color: #8d877e;
+}
+
+.blog__temas button {
+  font-family: inherit; font-size: 11px;
+  padding: 3px 9px;
+  background: transparent;
+  border: 1px solid #3a352d;
+  border-radius: 3px;
+  color: #b5afa6;
+  cursor: pointer;
+}
+
+.blog__temas button.is-ativo { background: #b5afa6; color: #16150f; border-color: #b5afa6; }
+
+.blog__cabecalho {
+  padding: 22px 16px 16px;
+  text-align: center;
+  border-bottom: 2px dashed currentColor;
+}
+
+.blog__cabecalho h1 {
+  margin: 0;
+  font-size: 30px;
+  font-weight: normal;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  letter-spacing: 0.02em;
+}
+
+.blog__cabecalho p { margin: 4px 0 0; font-size: 11px; opacity: 0.8; }
+
+.blog__corpo {
+  display: grid;
+  grid-template-columns: 1fr 190px;
+  gap: 18px;
+  padding: 16px;
+}
+
+.post {
+  margin-bottom: 22px;
+  padding-bottom: 16px;
+  border-bottom: 1px dotted currentColor;
+}
+
+.post h2 { margin: 0; font-size: 17px; font-weight: normal; }
+
+.post h2 button {
+  font: inherit;
+  background: none; border: 0; padding: 0;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: underline;
+}
+
+.post__data { margin: 2px 0 10px; font-size: 10px; opacity: 0.7; }
+
+.post__par { margin: 0 0 9px; }
+
+.post__musica {
+  margin: 10px 0 0;
+  font-size: 11px;
+  font-style: italic;
+  opacity: 0.85;
+}
+
+.post__rodape {
+  display: flex; gap: 6px;
+  margin: 10px 0 0;
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.blog__lateral section { margin-bottom: 18px; }
+
+.blog__lateral h3 {
+  margin: 0 0 6px;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+}
+
+.blog__lateral p { margin: 0; font-size: 11px; }
+
+.blog__lateral ul { list-style: none; margin: 0; padding: 0; font-size: 11px; }
+.blog__lateral li { padding: 1px 0; }
+
+.blog__contador {
+  font-family: ui-monospace, monospace;
+  font-size: 15px;
+  letter-spacing: 0.14em;
+  background: #000;
+  color: #0f0;
+  padding: 3px 5px;
+  display: inline-block;
+}
+
+.blog__dica {
+  margin: 0;
+  padding: 8px 10px;
+  background: #16150f;
+  border-top: 1px solid #3a352d;
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  font-size: 11px;
+  color: #8d877e;
+  text-align: center;
+}
+
+@media (max-width: 640px) {
+  .blog__corpo { grid-template-columns: 1fr; }
+}

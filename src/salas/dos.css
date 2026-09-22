@@ -1,0 +1,72 @@
+/* MS-DOS: fosforo branco-acinzentado sobre preto, 80 colunas. */
+
+.dos {
+  max-width: 660px;
+  margin: 0 auto;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+}
+
+.dos__tela {
+  height: 420px;
+  overflow-y: auto;
+  padding: 14px 16px;
+  background: #000;
+  border: 10px solid #23211d;
+  border-radius: 5px;
+  color: #c8c8c8;
+  font-size: 13px;
+  line-height: 1.32;
+  cursor: text;
+}
+
+.dos__linha {
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.dos__entrada {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+}
+
+.dos__entrada input {
+  flex: 1;
+  min-width: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: #c8c8c8;
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 0;
+  caret-color: transparent;
+}
+
+.dos__cursor {
+  animation: dos-pisca 1s steps(2, end) infinite;
+}
+
+@keyframes dos-pisca {
+  50% { opacity: 0; }
+}
+
+.dos__dica {
+  margin: 12px 0 0;
+  font-size: 11px;
+  color: #7a7167;
+  text-align: center;
+}
+
+.dos__dica b {
+  color: #c8c8c8;
+  font-weight: normal;
+  background: #23211d;
+  padding: 1px 5px;
+  border-radius: 2px;
+}
+
+@media (max-width: 560px) {
+  .dos__tela { font-size: 11px; height: 360px; border-width: 6px; }
+}

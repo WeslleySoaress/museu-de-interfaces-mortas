@@ -1,0 +1,162 @@
+/* BBS: fósforo âmbar sobre preto — o monitor mais comum em micro de casa
+   antes do VGA colorido virar padrão. */
+
+.bbs {
+  --ambar: #ffb64a;
+  --ambar-fraco: #a8713a;
+
+  max-width: 660px;
+  margin: 0 auto;
+  font-family: ui-monospace, 'Cascadia Mono', Consolas, 'Courier New', monospace;
+}
+
+.bbs__tela {
+  min-height: 460px;
+  display: flex;
+  flex-direction: column;
+  padding: 14px 16px;
+  background: #0d0a06;
+  border: 10px solid #23201a;
+  border-radius: 5px;
+  color: var(--ambar);
+  font-size: 12.5px;
+  line-height: 1.4;
+  text-shadow: 0 0 6px rgba(255, 182, 74, 0.35);
+  cursor: text;
+}
+
+.bbs__topo {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 6px;
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--ambar-fraco);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+
+.bbs__linha-info {
+  color: var(--ambar-fraco);
+}
+
+.bbs__tempo {
+  color: var(--ambar-fraco);
+}
+
+.bbs__tempo.is-baixo {
+  color: #ff6a4a;
+  animation: bbs-alerta 1s steps(2, end) infinite;
+}
+
+@keyframes bbs-alerta {
+  50% { opacity: 0.3; }
+}
+
+.bbs__corpo {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.bbs__ascii {
+  margin: 0;
+  font-family: inherit;
+  white-space: pre;
+  overflow-x: auto;
+}
+
+.bbs__secao h3 {
+  margin: 0 0 10px;
+  font-size: 12.5px;
+  font-weight: normal;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--ambar-fraco);
+  padding-bottom: 4px;
+}
+
+.bbs__item {
+  color: #ffd9a0;
+}
+
+.bbs__corpo-msg {
+  margin: 10px 0 0;
+  padding-left: 1px;
+  color: #ffd9a0;
+}
+
+.bbs__nota {
+  margin: 14px 0 0;
+  padding-top: 8px;
+  border-top: 1px dashed var(--ambar-fraco);
+  font-size: 11px;
+  line-height: 1.6;
+  color: var(--ambar-fraco);
+  white-space: normal;
+  text-shadow: none;
+}
+
+.bbs__prompt {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--ambar-fraco);
+}
+
+.bbs__seta {
+  color: var(--ambar-fraco);
+  font-size: 11px;
+}
+
+.bbs__prompt input {
+  width: 34px;
+  font-family: inherit;
+  font-size: 13px;
+  text-transform: uppercase;
+  color: var(--ambar);
+  background: transparent;
+  border: 0;
+  outline: none;
+  padding: 0;
+  caret-color: transparent;
+}
+
+.bbs__cursor {
+  animation: bbs-pisca 0.55s steps(2, end) infinite;
+}
+
+@keyframes bbs-pisca {
+  50% { opacity: 0; }
+}
+
+.bbs__erro {
+  margin: 6px 0 0;
+  font-size: 11px;
+  color: #ff6a4a;
+  text-shadow: none;
+}
+
+.bbs__despedida {
+  padding-top: 40px;
+  text-align: center;
+  color: var(--ambar-fraco);
+}
+
+.bbs__dica {
+  margin: 12px 0 0;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #7a7167;
+  text-align: center;
+}
+
+.bbs__dica b {
+  color: var(--ambar);
+  font-weight: normal;
+}
+
+@media (max-width: 600px) {
+  .bbs__tela { font-size: 10.5px; border-width: 6px; }
+}

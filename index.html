@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Política de segurança de conteúdo.
+
+      Este museu não tem servidor, não tem conta, não pede senha e não guarda
+      nada. Então "segurança" aqui não é autenticação — é reduzir a superfície
+      de ataque da própria página ao mínimo possível e travar isso no navegador.
+
+      A regra mais forte da lista é connect-src 'none': a página fica proibida
+      de fazer qualquer requisição de rede depois de carregada. Nada de fetch,
+      nada de WebSocket, nada de telemetria — nem por engano, nem por código
+      que entre aqui no futuro. Tudo que o visitante digita morre na aba dele.
+
+      object-src e base-uri fecham dois vetores clássicos de injeção; o
+      'unsafe-inline' em style-src é necessário porque o React aplica estilo
+      por atributo (a ampliação da vitrine, as cores de cada peça) — e atributo
+      de estilo não executa código.
+
+      A base é 'self' e não 'none' de propósito: 'none' bloqueia também tipos
+      de recurso que não previ, e o sintoma disso seria uma página em branco
+      sem explicação. Estrito sem ser quebradiço — as diretivas que realmente
+      importam estão declaradas uma a uma logo abaixo.
+    -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self';
+               script-src 'self';
+               style-src 'self' 'unsafe-inline';
+               img-src 'self' data:;
+               font-src 'self';
+               media-src 'self';
+               connect-src 'none';
+               form-action 'none';
+               base-uri 'none';
+               object-src 'none';
+               frame-src 'none'"
+    />
+    <meta name="referrer" content="no-referrer" />
+
+    <title>Museu de Interfaces Mortas</title>
+    <meta
+      name="description"
+      content="Um museu onde as peças funcionam. Interfaces que morreram, recriadas em HTML, clicáveis, com plaquinha explicando por que eram daquele jeito e o que sobrou delas hoje."
+    />
+    <meta name="color-scheme" content="dark" />
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

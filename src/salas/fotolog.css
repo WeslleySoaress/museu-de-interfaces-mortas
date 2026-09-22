@@ -1,0 +1,149 @@
+/* Fotolog: moldura branca, foto quadrada, comentarios ao lado.
+   As "fotos" sao gradientes em CSS - nenhuma imagem de ninguem. */
+
+.flog {
+  max-width: 720px;
+  margin: 0 auto;
+  background: #fff;
+  border: 1px solid #ccc;
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 11px;
+  color: #333;
+}
+
+.flog__topo {
+  padding: 12px 14px;
+  border-bottom: 3px solid #e84a78;
+}
+
+.flog__topo h1 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: normal;
+  letter-spacing: -0.02em;
+  color: #e84a78;
+}
+
+.flog__topo p { margin: 3px 0 0; color: #999; font-size: 10px; }
+
+.flog__corpo {
+  display: grid;
+  grid-template-columns: 1fr 230px;
+  gap: 14px;
+  padding: 14px;
+}
+
+.flog__foto {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border: 1px solid #ddd;
+  padding: 0;
+}
+
+.flog__foto--cozinha {
+  background:
+    radial-gradient(circle at 34% 40%, rgba(255, 228, 160, 0.9), transparent 42%),
+    linear-gradient(170deg, #d8a860, #8a5a2a 60%, #4a2e18);
+}
+
+.flog__foto--rua {
+  background:
+    linear-gradient(180deg, #b8d0e8 0%, #d8c8b0 52%, #6a6258 52%, #3a3630 100%);
+}
+
+.flog__foto--quarto {
+  background:
+    linear-gradient(90deg, #5a3a7a 0 38%, #e8e0d0 38% 100%),
+    #5a3a7a;
+}
+
+.flog__data {
+  margin: 9px 0 3px;
+  font-size: 10px;
+  color: #999;
+  text-transform: lowercase;
+}
+
+.flog__legenda {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.flog__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid #eee;
+}
+
+.flog__nav button {
+  font-family: inherit; font-size: 10px;
+  padding: 4px 9px;
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #e84a78;
+  cursor: pointer;
+}
+
+.flog__nav button:disabled { color: #ccc; cursor: not-allowed; }
+
+.flog__coluna-comentarios h2 {
+  margin: 0 0 8px;
+  font-size: 11px;
+  font-weight: normal;
+  color: #999;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 4px;
+}
+
+.flog__coluna-comentarios ul {
+  list-style: none; margin: 0 0 10px; padding: 0;
+  max-height: 210px; overflow-y: auto;
+}
+
+.flog__coluna-comentarios li {
+  padding: 5px 0;
+  border-bottom: 1px dotted #eee;
+  line-height: 1.5;
+}
+
+.flog__coluna-comentarios li b {
+  display: block;
+  color: #e84a78;
+  font-weight: normal;
+  font-size: 10px;
+}
+
+.flog__coluna-comentarios form { display: grid; gap: 5px; }
+
+.flog__coluna-comentarios input {
+  font-family: inherit; font-size: 11px;
+  padding: 5px 6px;
+  border: 1px solid #ddd;
+}
+
+.flog__coluna-comentarios button[type='submit'] {
+  justify-self: start;
+  font-family: inherit; font-size: 10px;
+  padding: 4px 14px;
+  background: #e84a78;
+  border: 0; color: #fff; cursor: pointer;
+}
+
+.flog__coluna-comentarios button:disabled { background: #ddd; cursor: not-allowed; }
+
+.flog__regra {
+  margin: 12px 0 0;
+  padding-top: 9px;
+  border-top: 1px solid #eee;
+  font-size: 10px;
+  color: #aaa;
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .flog__corpo { grid-template-columns: 1fr; }
+}
