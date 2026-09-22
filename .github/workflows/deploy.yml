@@ -1,0 +1,63 @@
+name: Deploy
+
+# Publica o museu no GitHub Pages a cada push na branch principal.
+#
+# A variável VITE_BASE precisa existir no repositório apontando para a
+# subpasta — sem ela o Vite gera caminhos absolutos e nada carrega quando o
+# site mora em usuario.github.io/<repo>/:
+#
+#     gh variable set VITE_BASE --body "/museu-de-interfaces-mortas/"
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# As permissões mínimas para publicar no Pages pela própria ação.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Um deploy de cada vez, e sem cancelar o que já está no meio: interromper
+# uma publicação deixa o site num estado indefinido.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  construir:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+
+      # A verificação roda aqui também, e não só no CI: o que vai para o ar
+      # passa pelos mesmos testes do que entra na branch.
+      - name: Verificação completa
+        run: npm run verificar
+
+      - name: Build
+        run: npm run build
+        env:
+          VITE_BASE: ${{ vars.VITE_BASE || '/' }}
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  publicar:
+    name: Pages
+    needs: construir
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
